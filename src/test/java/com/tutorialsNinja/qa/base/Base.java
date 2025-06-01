@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -36,7 +37,18 @@ public class Base {
 		
 		if(browserName.equals("chrome"))
 		{
-			driver=new ChromeDriver();
+			
+			ChromeOptions options = new ChromeOptions();
+
+            // Check if headless mode is enabled in config file
+            if (Boolean.parseBoolean(prop.getProperty("headless"))) {
+                options.addArguments("--headless"); // run in headless mode
+                options.addArguments("--no-sandbox"); // recommended for Jenkins
+                options.addArguments("--disable-dev-shm-usage"); // avoid shared memory issues
+                options.addArguments("--disable-gpu"); // disable GPU (especially for headless)
+                options.addArguments("--remote-allow-origins=*"); // to avoid connection issues
+            }
+			driver=new ChromeDriver(options);
 		}
 		else if(browserName.equals("firefox"))
 		{
