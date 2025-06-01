@@ -42,7 +42,7 @@ public class SearchTest extends Base {
 		hp.searchVProductName(prop1.getProperty("validProd"));
 		sp = hp.clickOnSearchBtn();
 
-		Assert.assertTrue(sp.displayStatusOfValidProduct(), "Product is available");
+		Assert.assertTrue(sp.displayStatusOfValidProduct(), "Product is available"); 
 
 	}
 
