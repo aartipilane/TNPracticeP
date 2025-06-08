@@ -42,11 +42,13 @@ public class Base {
 
             // Check if headless mode is enabled in config file
             if (Boolean.parseBoolean(prop.getProperty("headless"))) {
-                options.addArguments("--headless"); // run in headless mode
-                options.addArguments("--no-sandbox"); // recommended for Jenkins
-                options.addArguments("--disable-dev-shm-usage"); // avoid shared memory issues
-                options.addArguments("--disable-gpu"); // disable GPU (especially for headless)
-                options.addArguments("--remote-allow-origins=*"); // to avoid connection issues
+            	options.addArguments("--no-sandbox");
+            	options.addArguments("--disable-dev-shm-usage");
+            	options.addArguments("--remote-allow-origins=*");
+            	options.addArguments("--disable-gpu");
+            	options.addArguments("--headless"); // optional, if you're running Jenkins on a server with no GUI
+            	options.addArguments("--window-size=1920,1080");
+            	options.addArguments("user-data-dir=/tmp/temporary-profile-" + System.currentTimeMillis());
             }
 			driver=new ChromeDriver(options);
 		}
